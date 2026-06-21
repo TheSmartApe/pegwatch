@@ -23,18 +23,36 @@ NETWORK = "base"
 X402_VERSION = 1
 USDC_DECIMALS = 6
 DOMAIN = {"name": "USD Coin", "version": "2", "chainId": CHAIN_ID, "verifyingContract": USDC_BASE}
-BASE_RPC = os.environ.get("BASE_RPC", "https://mainnet.base.org")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 
+# endpoints Base (failover) — BASE_RPC en tête si défini
+_RPCS = []
+for _ep in [os.environ.get("BASE_RPC"), "https://base.publicnode.com", "https://mainnet.base.org",
+            "https://1rpc.io/base", "https://base-rpc.publicnode.com", "https://base.drpc.org"]:
+    if _ep and _ep not in _RPCS:
+        _RPCS.append(_ep)
+BASE_RPC = _RPCS[0]
 
-def rpc(method, params):
+
+def rpc(method, params, retries=2):
+    """JSON-RPC Base avec retry + bascule d'endpoint sur erreur réseau.
+    Une erreur RPC déterministe (revert, etc.) est propagée immédiatement (pas de failover)."""
     body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": method, "params": params}).encode()
-    req = Request(BASE_RPC, data=body, headers={"Content-Type": "application/json", "User-Agent": UA})
-    with urlopen(req, timeout=30) as r:
-        d = json.loads(r.read())
-    if d.get("error"):
-        raise RuntimeError(d["error"])
-    return d["result"]
+    last = None
+    for ep in _RPCS:
+        for _ in range(retries):
+            try:
+                req = Request(ep, data=body, headers={"Content-Type": "application/json", "User-Agent": UA})
+                with urlopen(req, timeout=20) as r:
+                    d = json.loads(r.read())
+            except (OSError, ValueError) as e:   # réseau / SSL / JSON illisible → on bascule
+                last = e
+                time.sleep(1)
+                continue
+            if d.get("error"):                   # erreur RPC déterministe → on propage
+                raise RuntimeError(d["error"])
+            return d["result"]
+    raise RuntimeError(f"tous les RPC Base ont échoué: {last}")
 
 
 def usdc_atomic(amount_usdc):

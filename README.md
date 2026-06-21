@@ -71,6 +71,9 @@ PegWatch is designed to plug into Mantle's agent primitives (next build steps):
   ETH for gas. A real settlement returns a Basescan tx. (Note: Questflow's facilitator
   currently supports only Base/Base-Sepolia — not Mantle — hence self-settling.)
 
+  **Live example:** 0.01 USDC settled on Base mainnet —
+  [basescan.org/tx/0x40f072…b4316](https://basescan.org/tx/0x40f072fb0bd1dcd734316e6431b567033a94db00c5137dbbc1e666b4823b4316)
+
 ## Data sources (all primary)
 - xStocks public API — `https://api.xstocks.fi/api/v2/public`
 - DefiLlama coins — `https://coins.llama.fi/prices/current/mantle:{address}`
