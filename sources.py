@@ -16,8 +16,13 @@ except Exception:
     _ET = timezone(timedelta(hours=-4))
 
 
-def http_get(url, headers=None, retries=3, timeout=30):
-    h = {"User-Agent": "PegWatch/0.1 (+research-agent)", "Accept": "application/json"}
+def http_get(url, headers=None, retries=3, timeout=20):
+    # UA navigateur : certaines API (Cloudflare) bloquent les UA non-navigateur depuis les IP datacenter
+    h = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                      "(KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+        "Accept": "application/json",
+    }
     if headers:
         h.update(headers)
     last = None

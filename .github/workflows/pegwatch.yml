@@ -18,7 +18,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
@@ -26,11 +26,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run PegWatch (full scan)
-        # le repo EST le package `pegwatch/` ; on lance depuis le dossier parent
+      - name: Run PegWatch (focus)
+        # le repo EST le package `pegwatch/` ; on lance depuis le dossier parent.
+        # mode focus (14 noms liquides) = robuste pour le dataset de dérive quotidien.
         run: |
           cd ..
-          python -m pegwatch.agent --full
+          python -m pegwatch.agent
 
       - name: Commit snapshot
         run: |
