@@ -1,0 +1,48 @@
+name: PegWatch
+
+# Tourne 2x/jour (ouverture + clôture de Wall St, en semaine) dans le cloud et commit le snapshot.
+# Mode "cloud" : prix de référence = Finnhub (l'endpoint NAV de xStocks timeout depuis les IP
+# datacenter), prix on-chain = DefiLlama, liste des tokens = data/universe.json (versionné).
+on:
+  schedule:
+    - cron: '40 13 * * 1-5'   # ~09:40 ET (peu après l'ouverture)
+    - cron: '10 20 * * 1-5'   # ~16:10 ET (peu après la clôture)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pegwatch-run
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run PegWatch (cloud / Finnhub reference)
+        # le repo EST le package `pegwatch/` ; on lance depuis le dossier parent
+        run: |
+          cd ..
+          python -m pegwatch.agent --ref-finnhub
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "pegwatch-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ reports/
+          if git diff --cached --quiet; then
+            echo "aucun changement"
+          else
+            git commit -m "pegwatch run ${{ github.run_id }} ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+          fi

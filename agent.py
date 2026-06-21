@@ -11,6 +11,7 @@ Sorties:
   pegwatch/reports/latest.md            # dernier rapport
   + draft de post X imprimé en console
 """
+import os
 import sys
 import json
 import time
@@ -23,18 +24,24 @@ if sys.platform == "win32":
 from pegwatch import config, sources, analyze, report, brain
 
 
-def run(full=False, use_llm=False):
+def run(full=False, use_llm=False, ref="nav"):
     t0 = time.time()
     now = datetime.now(timezone.utc)
     ts = now.strftime("%Y%m%dT%H%M%SZ")
     session = sources.us_market_session(now)
-    print(f"[pegwatch] {ts} | séance US: {session} | mode: {'full' if full else 'focus'}")
+    print(f"[pegwatch] {ts} | séance US: {session} | mode: {'full' if full else 'focus'} | ref: {ref}")
 
     print("[1/5] univers xStocks sur Mantle…")
-    universe = sources.list_mantle_xstocks()
-    print(f"       {len(universe)} tokens trouvés sur Mantle")
-    (config.DATA_DIR / "universe.json").write_text(
-        json.dumps(universe, indent=2, ensure_ascii=False), encoding="utf-8")
+    uni_file = config.DATA_DIR / "universe.json"
+    # mode cloud (ref=finnhub) : on lit la liste versionnée pour éviter l'endpoint xStocks
+    # (joignable mais lent depuis une IP datacenter) ; sinon on rafraîchit depuis l'API.
+    if ref == "finnhub" and uni_file.exists():
+        universe = json.loads(uni_file.read_text(encoding="utf-8"))
+        print(f"       {len(universe)} tokens (depuis universe.json — pas d'appel xStocks)")
+    else:
+        universe = sources.list_mantle_xstocks()
+        print(f"       {len(universe)} tokens trouvés sur Mantle")
+        uni_file.write_text(json.dumps(universe, indent=2, ensure_ascii=False), encoding="utf-8")
 
     symbols = list(universe) if full else [s for s in config.FOCUS if s in universe]
     print(f"       analyse de {len(symbols)} tokens")
@@ -43,15 +50,16 @@ def run(full=False, use_llm=False):
     addr_by_sym = {s: universe[s]["address"] for s in symbols}
     oc = sources.onchain_prices(addr_by_sym.values())
 
-    print("[3/5] prix de référence (NAV xStocks)…")
+    ref_label = "prix réel (Finnhub)" if ref == "finnhub" else "NAV xStocks"
+    print(f"[3/5] prix de référence ({ref_label})…")
     rows = []
     for i, s in enumerate(symbols, 1):
-        nav = sources.nav_price(s)
-        row = analyze.build_row(s, universe[s], nav, oc.get(addr_by_sym[s]), session)
-        # cross-check Finnhub (optionnel)
-        if config.FINNHUB_API_KEY and row["premium_pct"] is not None:
-            rp = sources.real_stock_price(universe[s]["underlying"])
-            row["real_price"] = rp
+        meta = universe[s]
+        if ref == "finnhub":
+            reference = sources.real_stock_price(meta.get("underlying"))
+        else:
+            reference = sources.nav_price(s)
+        row = analyze.build_row(s, meta, reference, oc.get(addr_by_sym[s]), session)
         rows.append(row)
         if i % 25 == 0:
             print(f"       {i}/{len(symbols)}")
@@ -69,6 +77,7 @@ def run(full=False, use_llm=False):
         "timestamp": ts,
         "session": session,
         "mode": "full" if full else "focus",
+        "ref_source": ref,
         "summary": summary,
         "liquidity": liquidity,
         "rows": rows,
@@ -97,4 +106,5 @@ def run(full=False, use_llm=False):
 
 
 if __name__ == "__main__":
-    run(full="--full" in sys.argv, use_llm="--brain" in sys.argv)
+    ref = "finnhub" if ("--ref-finnhub" in sys.argv or os.environ.get("PEGWATCH_REF") == "finnhub") else "nav"
+    run(full="--full" in sys.argv, use_llm="--brain" in sys.argv, ref=ref)
