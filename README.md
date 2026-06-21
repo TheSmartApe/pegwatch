@@ -60,8 +60,16 @@ PegWatch is designed to plug into Mantle's agent primitives (next build steps):
   research calls carry an auditable reputation trail.
 - **Mantle AI Agent Skill** — package the research capability as a `SKILL.md`
   (OpenClaw / `npx skills` format) so any agent can install it.
-- **x402** — (optional) put the daily report behind an HTTP-402 paywall via the
-  Questflow facilitator on Mantle, so other agents pay USDC to consume it.
+- **x402** — the daily report is sold behind an HTTP-402 paywall (`pegwatch/x402/`).
+  A buyer signs a gasless EIP-3009 USDC authorization; PegWatch runs its **own
+  facilitator** (no Coinbase/Questflow key needed) and settles on **Base mainnet**.
+  ```bash
+  python -m pegwatch.x402.server      # serve the report behind 402 on :8402
+  python -m pegwatch.x402.client      # pay 0.01 USDC and fetch the report
+  ```
+  Payer wallet needs USDC (gasless); the facilitator/treasury wallet needs a little
+  ETH for gas. A real settlement returns a Basescan tx. (Note: Questflow's facilitator
+  currently supports only Base/Base-Sepolia — not Mantle — hence self-settling.)
 
 ## Data sources (all primary)
 - xStocks public API — `https://api.xstocks.fi/api/v2/public`

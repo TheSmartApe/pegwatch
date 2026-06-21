@@ -10,3 +10,5 @@ __pycache__/
 # data/snapshots/
 # reports/
 onchain/identity.json
+onchain/treasury.json
+onchain/*wallet*.json
