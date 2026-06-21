@@ -1,0 +1,12 @@
+# secrets — ne JAMAIS committer
+.env
+*.key
+
+# python
+__pycache__/
+*.pyc
+
+# sorties locales (dé-commente si tu ne veux pas les versionner)
+# data/snapshots/
+# reports/
+onchain/identity.json

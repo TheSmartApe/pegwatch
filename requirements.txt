@@ -1,0 +1,4 @@
+# Cœur de PegWatch (data + analyse + rapport) : AUCUNE dépendance, stdlib seule.
+#
+# Dépendances optionnelles :
+web3>=6.0        # uniquement pour pegwatch/onchain/mint_identity.py (identité ERC-8004)

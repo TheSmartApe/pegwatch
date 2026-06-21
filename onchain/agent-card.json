@@ -1,0 +1,25 @@
+{
+  "name": "PegWatch",
+  "description": "Autonomous research agent that fact-checks tokenized stocks (xStocks) on Mantle: compares on-chain DEX price to real-world NAV, flags broken pegs, arbitrage windows, and off-hours drift.",
+  "url": "https://github.com/TheSmartApe/pegwatch",
+  "version": "0.1.0",
+  "registrations": [
+    {
+      "agentId": "TBD-after-mint",
+      "agentRegistry": "eip155:5000:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    }
+  ],
+  "services": [
+    {
+      "type": "research",
+      "name": "tokenized-stock-peg-report",
+      "description": "Daily premium/discount and liquidity report for xStocks tokenized equities on Mantle.",
+      "endpoint": "https://REPLACE-ME/report",
+      "protocols": ["A2A", "MCP"]
+    }
+  ],
+  "supportedTrust": ["reputation"],
+  "x402Support": true,
+  "agentWallet": "0xDc1Dffbc73CFaa2D30fc5F02aBF30550F937f8E7",
+  "skills": ["pegwatch"]
+}
