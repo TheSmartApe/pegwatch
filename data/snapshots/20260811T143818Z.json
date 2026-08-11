@@ -1,0 +1,188 @@
+{
+  "timestamp": "20260811T143818Z",
+  "session": "open",
+  "mode": "focus",
+  "ref_source": "finnhub",
+  "summary": {
+    "session": "open",
+    "n_total": 14,
+    "n_priced": 14,
+    "median_abs_premium": 0.467,
+    "n_blue_chip": 7,
+    "n_breaks": 0,
+    "n_thin_liquidity": 0,
+    "n_off_hours_drift": 0,
+    "biggest_premium": {
+      "symbol": "CRCLx",
+      "premium_pct": 2.139
+    },
+    "biggest_discount": {
+      "symbol": "MSFTx",
+      "premium_pct": -0.051
+    }
+  },
+  "liquidity": {
+    "mantle_tvl": 69602484.53135094,
+    "protocols": {
+      "fluxion-network": 2020031.35558,
+      "merchant-moe": 11648417
+    }
+  },
+  "rows": [
+    {
+      "symbol": "TSLAx",
+      "underlying": "TSLA",
+      "address": "0x8ad3c73f833d3f9a523ab01476625f269aeb7cf0",
+      "nav": 333.69,
+      "onchain": 335.0685,
+      "premium_pct": 0.413,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "NVDAx",
+      "underlying": "NVDA",
+      "address": "0xc845b2894dbddd03858fd2d643b4ef725fe0849d",
+      "nav": 219.15,
+      "onchain": 219.7014,
+      "premium_pct": 0.252,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "AAPLx",
+      "underlying": "AAPL",
+      "address": "0x9d275685dc284c8eb1c79f6aba7a63dc75ec890a",
+      "nav": 306.68,
+      "onchain": 307.4856,
+      "premium_pct": 0.263,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "GOOGLx",
+      "underlying": "GOOGL",
+      "address": "0xe92f673ca36c5e2efd2de7628f815f84807e803f",
+      "nav": 352.16,
+      "onchain": 352.4427,
+      "premium_pct": 0.08,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "METAx",
+      "underlying": "META",
+      "address": "0x96702be57cd9777f835117a809c7124fe4ec989a",
+      "nav": 609.16,
+      "onchain": 612.7514,
+      "premium_pct": 0.59,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "MSFTx",
+      "underlying": "MSFT",
+      "address": "0x5621737f42dae558b81269fcb9e9e70c19aa6b35",
+      "nav": 501.75,
+      "onchain": 501.4927,
+      "premium_pct": -0.051,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "AMZNx",
+      "underlying": "AMZN",
+      "address": "0x3557ba345b01efa20a1bddc61f573bfd87195081",
+      "nav": 274.27,
+      "onchain": 274.7386,
+      "premium_pct": 0.171,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "MSTRx",
+      "underlying": "MSTR",
+      "address": "0xae2f842ef90c0d5213259ab82639d5bbf649b08e",
+      "nav": 98.06,
+      "onchain": 98.9227,
+      "premium_pct": 0.88,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "SPYx",
+      "underlying": "SPY",
+      "address": "0x90a2a4c76b5d8c0bc892a69ea28aa775a8f2dd48",
+      "nav": 773.42,
+      "onchain": 777.4477,
+      "premium_pct": 0.521,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "QQQx",
+      "underlying": "QQQ",
+      "address": "0xa753a7395cae905cd615da0b82a53e0560f250af",
+      "nav": 721.19,
+      "onchain": 723.3056,
+      "premium_pct": 0.293,
+      "confidence": 0.99,
+      "tier": "blue_chip",
+      "flags": []
+    },
+    {
+      "symbol": "SPCXx",
+      "underlying": "SPCX",
+      "address": "0x68fa48b1c2fe52b3d776e1953e0e782b5044ce28",
+      "nav": 133.53,
+      "onchain": 136.3704,
+      "premium_pct": 2.127,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "COINx",
+      "underlying": "COIN",
+      "address": "0x364f210f430ec2448fc68a49203040f6124096f0",
+      "nav": 149.91,
+      "onchain": 151.6029,
+      "premium_pct": 1.129,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "HOODx",
+      "underlying": "HOOD",
+      "address": "0xe1385fdd5ffb10081cd52c56584f25efa9084015",
+      "nav": 93.82,
+      "onchain": 94.6777,
+      "premium_pct": 0.914,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    },
+    {
+      "symbol": "CRCLx",
+      "underlying": "CRCL",
+      "address": "0xfebded1b0986a8ee107f5ab1a1c5a813491deceb",
+      "nav": 71.23,
+      "onchain": 72.7538,
+      "premium_pct": 2.139,
+      "confidence": 0.99,
+      "tier": "mid",
+      "flags": []
+    }
+  ],
+  "interpretation": "7 blue chips tiennent un peg serré (liquidité profonde). plus gros discount: MSFTx (-0.05%) — fenêtre d'arbitrage potentielle, à confirmer avec le volume avant de conclure. plus gros premium: CRCLx (+2.14%)."
+}
