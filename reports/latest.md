@@ -1,30 +1,30 @@
-# PegWatch — 20261113T010150Z
+# PegWatch — 20261113T203740Z
 
-**Séance US :** closed  |  **tokens chiffrés :** 14/14  |  **écart médian :** 0.525%
-**Blue chips (peg serré) :** 6  |  **pegs cassés (>3%) :** 0  |  **pricing peu liquide :** 0  |  **dérive hors-séance :** 2
-**Plus gros premium :** SPCXx +1.33%  |  **plus gros discount :** MSTRx -0.50%
+**Séance US :** open  |  **tokens chiffrés :** 14/14  |  **écart médian :** 0.107%
+**Blue chips (peg serré) :** 11  |  **pegs cassés (>3%) :** 0  |  **pricing peu liquide :** 0  |  **dérive hors-séance :** 0
+**Plus gros premium :** SPYx +0.77%  |  **plus gros discount :** AMZNx -0.11%
 
 ## Premium / discount (on-chain DEX vs prix de référence)
 
 | token | sous-jacent | NAV | on-chain | écart | conf | tier | flags |
 |---|---|---:|---:|---:|---:|---|---|
-| SPCXx | SPCX | 139.94 | 141.7953 | +1.33% | 0.999 | mid | off_hours_drift |
-| NVDAx | NVDA | 166.19 | 168.3745 | +1.31% | 0.999 | mid | off_hours_drift |
-| SPYx | SPY | 757.12 | 764.2334 | +0.94% | 0.99 | mid | — |
-| HOODx | HOOD | 81.35 | 81.8649 | +0.63% | 0.999 | mid | — |
-| GOOGLx | GOOGL | 298.7 | 300.521 | +0.61% | 0.999 | mid | — |
-| QQQx | QQQ | 688.17 | 692.1107 | +0.57% | 0.99 | mid | — |
-| METAx | META | 623.61 | 627.0118 | +0.55% | 0.999 | mid | — |
-| MSTRx | MSTR | 114.41 | 113.8336 | -0.50% | 0.99 | mid | — |
-| TSLAx | TSLA | 397.45 | 399.3862 | +0.49% | 0.999 | blue_chip | — |
-| CRCLx | CRCL | 63.82 | 64.0456 | +0.35% | 0.999 | blue_chip | — |
-| AMZNx | AMZN | 267.44 | 268.1486 | +0.27% | 0.999 | blue_chip | — |
-| MSFTx | MSFT | 523 | 523.5514 | +0.10% | 0.99 | blue_chip | — |
-| COINx | COIN | 130.67 | 130.6483 | -0.02% | 0.999 | blue_chip | — |
-| AAPLx | AAPL | 354.88 | 354.8479 | -0.01% | 0.999 | blue_chip | — |
+| SPYx | SPY | 752.65 | 758.4161 | +0.77% | 0.99 | mid | — |
+| MSFTx | MSFT | 523.86 | 527.5832 | +0.71% | 0.99 | mid | — |
+| MSTRx | MSTR | 112.12 | 112.8091 | +0.61% | 0.99 | mid | — |
+| QQQx | QQQ | 678.56 | 681.3653 | +0.41% | 0.99 | blue_chip | — |
+| NVDAx | NVDA | 161.66 | 162.1264 | +0.29% | 0.999 | blue_chip | — |
+| METAx | META | 640.27 | 642.0213 | +0.27% | 0.999 | blue_chip | — |
+| AMZNx | AMZN | 265.8 | 265.506 | -0.11% | 0.99 | blue_chip | — |
+| CRCLx | CRCL | 62.4 | 62.4647 | +0.10% | 0.999 | blue_chip | — |
+| HOODx | HOOD | 78.19 | 78.2607 | +0.09% | 0.999 | blue_chip | — |
+| GOOGLx | GOOGL | 295.38 | 295.2784 | -0.03% | 0.999 | blue_chip | — |
+| TSLAx | TSLA | 390.34 | 390.2144 | -0.03% | 0.999 | blue_chip | — |
+| COINx | COIN | 128.62 | 128.656 | +0.03% | 0.999 | blue_chip | — |
+| AAPLx | AAPL | 356.27 | 356.3444 | +0.02% | 0.999 | blue_chip | — |
+| SPCXx | SPCX | 139.75 | 139.7662 | +0.01% | 0.999 | blue_chip | — |
 
 ## Contexte liquidité (DefiLlama, live)
 
-- Mantle chain TVL : $101.9M
-- fluxion-network : $7.3M
-- merchant-moe : $10.8M
+- Mantle chain TVL : $96.9M
+- fluxion-network : $7.2M
+- merchant-moe : $10.6M
